@@ -20,11 +20,18 @@ SecureMed-LLM is a safeguarded large language model for generating chest X-ray c
 
 ## Repository Structure
 SecureMed-LLM/
-data/
-├── train/      # Training dataset (anonymized chest X-rays + clinical text)
-├── valid/      # Validation dataset for hyperparameter tuning
-├── test/       # Test dataset for final evaluation
-└── README.md   # Info about datasets, formats, sources
+## Dataset
+
+The project uses an enhanced version of the publicly available **OPEN-I Chest X-ray dataset**, obtained from Kaggle. 
+
+- **Training:** 93,347 image–report pairs  
+- **Validation:** 1,885 pairs  
+- **Testing:** 1,541 images  
+
+Each study includes a chest X-ray image and a corresponding textual radiology report describing **Findings** (anatomical/pathological observations) and **Impression** (clinical interpretation).
+
+**Data Folder Structure**:
+
 ├── scripts/               
 │   ├── train_securemed.py # Fine-tuning LLM with DP + adversarial training
 │   ├── evaluate.py        # Evaluate model performance (BLEU, SSIM, PSNR)
