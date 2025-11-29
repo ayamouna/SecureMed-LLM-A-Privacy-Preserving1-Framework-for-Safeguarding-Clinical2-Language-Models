@@ -1,3 +1,6 @@
-DATA TRAIN 
-DATA TEST 
-DATA VALID
+ TRAIN 
+ TEST 
+ VALID
+We used an enhanced version of the publicly available OPEN-I Chest X-ray dataset, obtained from Kaggle. The dataset contains 93,347 image–report pairs for training, 1,885 pairs for validation, and 1,541 images for testing. Each study includes a chest X-ray image and a corresponding textual radiology report describing Findings (anatomical/pathological observations) and Impression (clinical interpretation).
+
+https://www.kaggle.com/datasets/financekim/curated-cxr-report-generation-dataset/data
