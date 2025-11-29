@@ -1,0 +1,2 @@
+# SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models
+This repository provides the full implementation of a secure medical LLM pipeline, including Differential Privacy (DP-SGD), adversarial fine-tuning (FGSM, PGD, DeepFool), PHI anonymization for images and text, encrypted inference using ECIES, and an IDS-LLM validation layer for safety and consistency checking.
