@@ -1,6 +1,28 @@
 SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models
 
 This repository provides the full implementation of SecureMed-LLM, a secure medical AI pipeline designed to generate chest X-ray clinical reports while ensuring privacy, robustness, and safety.
+System Architecture (6-Level Secure Pipeline)
+
+SecureMed-LLM consists of a six-level security pipeline designed to protect patient data, ensure robust processing, and deliver safe clinical reports:
+
+Level 1 — PHI Anonymization
+Removes patient identifiers from text and images (Presidio + Med-Guard).
+
+Level 2 — Secure Transmission (TLS 1.3)
+Protects data transfer using modern cryptographic protocols.
+
+Level 3 — LLM Processing
+Generates clinical Findings and Impressions using the robust fine-tuned LLM.
+
+Level 4 — IDS-LLM Validation
+Ensures clinical safety using rule-based checks, parameter constraints, and anomaly detection.
+
+Level 5 — ECIES Encryption
+Encrypts the output report before delivery to prevent tampering or interception.
+
+Level 6 — Secure Delivery
+Sends the encrypted report to authorized clinicians only.
+
 The system integrates:
 
 Differential Privacy (DP-SGD)
