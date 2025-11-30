@@ -37,6 +37,21 @@ IDS-LLM Validation for safe clinical outputs
 
 This project accompanies the master thesis:
 “SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models.”
+The graphical abstract provides an overview of the complete SecureMed-LLM framework. It illustrates:
+
+Local anonymization of patient images using Med-Guard
+
+Secure data transmission before model processing
+
+Robust LLM fine-tuning using adversarial training (FGSM, PGD, DeepFool) and Differential Privacy
+
+IDS-LLM validation module that blocks unsafe or clinically inconsistent reports
+
+ECIES encryption to protect the generated report
+
+Key performance results, including BLEU improvements, privacy leakage reduction, and robustness gains
+
+This visual summarizes the full privacy-preserving and safety-aware pipeline from input chest X-ray to the final secure clinical report.
 
 ⭐ Key Features
 
