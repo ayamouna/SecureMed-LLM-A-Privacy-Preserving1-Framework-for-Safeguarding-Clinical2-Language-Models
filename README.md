@@ -37,5 +37,19 @@ MIA Attack Reduction: 89% → 55% with DP
 Prompt Injection Defense: 37.5% → 78.3%
 
 Adversarial Robust BLEU: 0.29 → 0.68 after fine-tuning
+Dataset
+
+We used an enhanced version of the publicly available OPEN-I Chest X-ray dataset, downloaded from Kaggle.
+
+Train: 93,347 pairs
+
+Validation: 1,885 pairs
+
+Test: 1,541 images
+
+Each study includes a chest X-ray and a radiology report (Findings + Impression).
+
+📥 Download Link:
+https://www.kaggle.com/datasets/financekim/curated-cxr-report-generation-dataset/data
 
 Validation Pass Rate: 91.8%
