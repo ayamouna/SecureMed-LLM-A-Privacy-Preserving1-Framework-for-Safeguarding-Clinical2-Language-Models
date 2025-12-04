@@ -1,0 +1,25 @@
+scripts/
+│
+├── med_guard/
+│   ├── medguard_text_anonymizer.py
+│   ├── medguard_image_anonymizer.py
+│   ├── gaussian_noise.py
+│   ├── presidio_loader.py
+│   └── README.md  
+│
+├── finetuning/
+│   ├── finetune_llm_offline.py
+│   ├── dp_training.py
+│   ├── adversarial_training.py
+│   └── README.md
+│
+├── evaluation/
+│   ├── compute_bleu.py
+│   ├── compute_psnr_ssim.py
+│   ├── cosine_similarity_eval.py
+│   └── README.md
+│
+└── inference/
+    ├── encrypted_inference_ecies.py
+    ├── generate_report.py
+    └── README.md
