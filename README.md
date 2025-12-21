@@ -107,7 +107,18 @@ The repository contains:
 - Model training and adversarial fine-tuning scripts  
 - Privacy-preserving and anonymization modules  
 - IDS-LLM validation components  
-- Evaluation and result analysis scripts  
+- Evaluation and result analysis scripts
+- ECIES Encryption Module
+
+This module provides end-to-end encryption for clinical reports in SecureMed-LLM using ECIES (X25519 + AES-GCM). It allows:
+
+Encrypting a report with the doctor’s public key.
+
+Decrypting the report with the doctor’s private key.
+
+Secure delivery of regenerated reports while maintaining patient privacy.
+
+Dependencies: cryptography Python package
 
 ---
 
