@@ -133,7 +133,36 @@ Secure delivery of regenerated reports while maintaining patient privacy.
 Dependencies: cryptography Python package
 
 ---
+Scripts Overview
+1️⃣ PHI Anonymization
 
+medguard_text_anonymizer.py: Removes personally identifiable information (PII) from medical text.
+
+medguard_image_anonymizer.py: Removes any identifying information from medical images.
+
+2️⃣ LLM Fine-Tuning
+
+finetune_llm_offline.py: Fine-tunes a T5 model on anonymized medical reports.
+
+dp_training.py: Trains the model using Differential Privacy (DP-SGD).
+
+3️⃣ Adversarial Robustness
+
+adversarial_training.py: Improves model robustness against FGSM, PGD, and DeepFool attacks.
+
+generate_adversarial_prompts.py: Generates adversarial text prompts for radiology reports.
+
+4️⃣ IDS Validation
+
+ids_validation.py: Validates clinical reports using rule-based checks, medical term verification, and anomaly detection.
+
+visualize_ids_performance.py: Visualizes pass rates for each IDS validation module.
+
+5️⃣ ECIES Encryption
+
+encrypt_report.py: Encrypts clinical reports using the doctor’s public key.
+
+decrypt_report.py: Decrypts clinical reports using the doctor’s private key.
 ## Computational Resources
 Due to the computational requirements of large language models (LLMs), it is recommended to run training and large-scale experiments using cloud-based or GPU-enabled environments:
 
