@@ -1,61 +1,135 @@
 # SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models
 
 ## Description
-This repository provides the full implementation of SecureMed-LLM, a secure medical AI framework for chest X-ray clinical report generation. The system ensures privacy preservation, robustness against adversarial attacks, and secure delivery of clinical reports.
+This repository provides the full implementation of **SecureMed-LLM**, a secure medical AI framework designed to generate chest X-ray clinical reports while ensuring **privacy preservation**, **robustness against adversarial attacks**, and **secure delivery** of clinical outputs.
+
+The framework integrates privacy-preserving learning, adversarial robustness, clinical safety validation, and cryptographic protection into a unified multi-level secure pipeline.
 
 This code accompanies the master thesis:
-"SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models."
+**“SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models.”**
 
-## System Architecture
-SecureMed-LLM follows a six-level secure pipeline:
+---
 
-**Level 1 – PHI Anonymization**  
-Removal of personally identifiable information from medical images and text using Med-Guard and Presidio.
+## System Architecture (6-Level Secure Pipeline)
+SecureMed-LLM follows a six-level security pipeline designed to protect patient data, ensure robust processing, and deliver safe clinical reports:
 
-**Level 2 – Secure Transmission**  
-Secure data transfer using TLS 1.3.
+**Level 1 — PHI Anonymization**  
+Removes personally identifiable information from medical images and text using **Med-Guard** and **Presidio**.
 
-**Level 3 – LLM Processing**  
-Generation of Findings and Impressions using a fine-tuned large language model.
+**Level 2 — Secure Transmission (TLS 1.3)**  
+Protects data transfer using modern cryptographic protocols.
 
-**Level 4 – IDS-LLM Validation**  
-Validation of generated reports using rule-based constraints, clinical checks, and anomaly detection.
+**Level 3 — LLM Processing**  
+Generates clinical **Findings** and **Impressions** using a robust fine-tuned large language model.
 
-**Level 5 – Report Encryption**  
-Encryption of generated reports using ECIES to prevent tampering or interception.
+**Level 4 — IDS-LLM Validation**  
+Ensures clinical safety using rule-based checks, parameter constraints, and anomaly detection.
 
-**Level 6 – Secure Delivery**  
-Delivery of encrypted reports to authorized clinicians only.
+**Level 5 — Report Encryption (ECIES)**  
+Encrypts the generated clinical report before delivery to prevent tampering or interception.
+
+**Level 6 — Secure Delivery**  
+Sends the encrypted report exclusively to authorized clinicians.
+
+---
+
+## Models Used
+
+### BioMedCLIP
+BioMedCLIP is used as the vision–language backbone for medical image understanding and multimodal alignment.
+
+- Model: **BioMedCLIP**
+- Purpose: Chest X-ray image encoding and visual–textual feature alignment
+- Source: https://github.com/microsoft/BioMedCLIP
+- Pretrained weights provided by the original authors
+
+### T5 Language Model
+A **T5-based language model** is used for clinical report generation.
+
+- Model family: **T5**
+- Version: **T5-base**
+- Purpose: Generation of Findings and Impression sections
+- Source: https://huggingface.co/google-t5/t5-base
+- Fine-tuned on medical report data
+
+---
 
 ## Key Features
 - Adversarially robust report generation (FGSM, PGD, DeepFool)
-- Differential Privacy training (DP-SGD, ε = 3.0)
-- PHI anonymization for text and images
+- Differential Privacy training using DP-SGD (ε = 3.0)
+- PHI anonymization for both images and text
 - Encrypted inference pipeline using ECIES
 - IDS-LLM validation for clinical safety
-- Multi-level secure architecture
+- Secure multi-level system architecture
+
+---
+
+## Graphical Abstract
+The graphical abstract provides an overview of the complete SecureMed-LLM framework and illustrates:
+
+- Local anonymization of patient images using Med-Guard
+- Secure data transmission prior to model processing
+- Robust LLM fine-tuning with adversarial training and Differential Privacy
+- IDS-LLM validation blocking unsafe or clinically inconsistent reports
+- ECIES encryption protecting the generated report
+- Key performance improvements in robustness and privacy
+
+This visualization summarizes the full privacy-preserving and safety-aware pipeline from chest X-ray input to the final secure clinical report.
+
+---
+
+## Results Summary
+- **Membership Inference Attack reduction:** 89% → 55% with Differential Privacy
+- **Prompt injection defense accuracy:** 37.5% → 78.3%
+- **Adversarial robust BLEU score:** 0.29 → 0.68 after fine-tuning
+- **Validation pass rate:** 91.8%
+
+---
 
 ## Dataset Information
-The experiments use an enhanced version of the publicly available OPEN-I Chest X-ray dataset obtained from Kaggle.
+The experiments use an enhanced version of the publicly available **OPEN-I Chest X-ray dataset**, obtained from Kaggle.
 
-- Training set: 93,347 image-report pairs
+- Training set: 93,347 image–report pairs
 - Validation set: 1,885 pairs
 - Test set: 1,541 images
 
-Dataset link:
+Each study includes a chest X-ray image and an associated radiology report (Findings + Impression).
+
+Dataset link:  
 https://www.kaggle.com/datasets/financekim/curated-cxr-report-generation-dataset/data
+
+---
 
 ## Code Information
 The repository contains:
 - Data preprocessing scripts
 - Model training and adversarial fine-tuning scripts
-- Privacy-preserving mechanisms
-- IDS-LLM validation modules
+- Privacy-preserving and anonymization modules
+- IDS-LLM validation components
 - Evaluation and result analysis scripts
 
-## Usage Instructions
+---
+
+## Installation
 
 Clone the repository:
 ```bash
 git clone https://github.com/ayamouna/SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models.git
 cd SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models
+## Virtual Environment Setup (Recommended)
+
+To avoid dependency conflicts, it is recommended to use a Python virtual environment.
+
+1. Navigate to the project directory (after cloning the repository):
+```bash
+cd SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models
+## Computational Resources
+
+Due to the computational requirements of large language models (LLMs), it is recommended to run training and large-scale experiments using cloud-based or GPU-enabled environments.
+
+- Training and fine-tuning were conducted using GPU resources.
+- Cloud platforms such as Google Colab, AWS, Azure, or similar environments are suitable.
+- Local execution without a GPU may be limited to preprocessing, evaluation, or small-scale testing.
+
+This ensures efficient training, faster convergence, and reproducible results for LLM-based experiments.
+
