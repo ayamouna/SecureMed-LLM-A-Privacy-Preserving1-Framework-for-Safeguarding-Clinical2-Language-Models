@@ -110,6 +110,15 @@ The repository contains:
 
 ---
 
+## Computational Resources
+
+Due to the computational requirements of large language models (LLMs), it is recommended to run training and large-scale experiments using cloud-based or GPU-enabled environments.
+
+- Training and fine-tuning were conducted using GPU resources.
+- Cloud platforms such as Google Colab, AWS, Azure, or similar environments are suitable.
+- Local execution without a GPU may be limited to preprocessing, evaluation, or small-scale testing.
+
+This ensures efficient training, faster convergence, and reproducible results for LLM-based experiments.
 ## Installation
 
 Clone the repository:
@@ -123,13 +132,5 @@ To avoid dependency conflicts, it is recommended to use a Python virtual environ
 1. Navigate to the project directory (after cloning the repository):
 ```bash
 cd SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models
-## Computational Resources
 
-Due to the computational requirements of large language models (LLMs), it is recommended to run training and large-scale experiments using cloud-based or GPU-enabled environments.
-
-- Training and fine-tuning were conducted using GPU resources.
-- Cloud platforms such as Google Colab, AWS, Azure, or similar environments are suitable.
-- Local execution without a GPU may be limited to preprocessing, evaluation, or small-scale testing.
-
-This ensures efficient training, faster convergence, and reproducible results for LLM-based experiments.
 
