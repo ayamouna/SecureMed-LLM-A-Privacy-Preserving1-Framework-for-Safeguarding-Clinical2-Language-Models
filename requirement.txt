@@ -21,6 +21,16 @@ opencv-python>=4.7
 
 # Visualization
 matplotlib>=3.7
+cryptography
+torch
+transformers
+pandas
+pillow
+tqdm
+sentence-transformers
+scikit-learn
+matplotlib
+
 
 # Cryptography for ECIES
 cryptography>=41.0
