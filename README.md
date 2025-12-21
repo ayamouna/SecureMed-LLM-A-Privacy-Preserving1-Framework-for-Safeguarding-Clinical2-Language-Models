@@ -106,10 +106,22 @@ The repository contains:
 - Data preprocessing scripts  
 - Model training and adversarial fine-tuning scripts  
 - Privacy-preserving and anonymization modules  
-- IDS-LLM validation components  
+- IDS-LLM validation components
+- IDS-LLM Validation Module
+
+This module validates generated clinical reports in SecureMed-LLM using:
+
+Rule-based checks for forbidden terms and contradictions.
+
+Clinical term verification to ensure medical accuracy.
+
+Anomaly detection using Isolation Forest on sentence embeddings.
+
+Computes IDS decisions, confusion matrix, and performance metrics.
+
+Produces a visualization of pass rates for each validation module. 
 - Evaluation and result analysis scripts
 - ECIES Encryption Module
-
 This module provides end-to-end encryption for clinical reports in SecureMed-LLM using ECIES (X25519 + AES-GCM). It allows:
 
 Encrypting a report with the doctor’s public key.
