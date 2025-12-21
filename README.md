@@ -54,7 +54,8 @@ The repository contains:
 - Evaluation and result analysis scripts
 
 ## Usage Instructions
-1. Clone the repository:
+
+Clone the repository:
 ```bash
-git clone https://github.com/your-username/SecureMed-LLM.git
-cd SecureMed-LLM
+git clone https://github.com/ayamouna/SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models.git
+cd SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models
