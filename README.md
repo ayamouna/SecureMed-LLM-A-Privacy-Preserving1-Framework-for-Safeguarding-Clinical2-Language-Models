@@ -40,7 +40,7 @@ BioMedCLIP is used as the vision–language backbone for medical image understan
 
 - Model: **BioMedCLIP**
 - Purpose: Chest X-ray image encoding and visual–textual feature alignment
-- Source: https://github.com/microsoft/BioMedCLIP
+- Source: https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224
 - Pretrained weights provided by the original authors
 
 ### T5 Language Model
