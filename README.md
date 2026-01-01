@@ -8,62 +8,71 @@ This repository accompanies the master thesis:
 ---
 
 ## Table of Contents
-1. [About the Project](#about-the-project)
+1. [Project Overview](#project-overview)
 2. [Why SecureMed-LLM is Useful](#why-securemed-llm-is-useful)
 3. [System Architecture](#system-architecture-6-level-secure-pipeline)
 4. [Models Used](#models-used)
 5. [Key Features](#key-features)
-6. [Dataset](#dataset)
-7. [Results Summary](#results-summary)
+6. [Dataset Information](#dataset-information)
+7. [Results](#results)
 8. [Methodology & Workflow](#methodology--workflow)
-9. [Installation](#installation)
-10. [Usage](#usage)
+9. [Installation & Requirements](#installation--requirements)
+10. [Usage Instructions](#usage-instructions)
 11. [Computational Resources](#computational-resources)
-12. [Contributing](#contributing)
-13. [License](#license)
+12. [Citations](#citations)
+13. [License & Contribution Guidelines](#license--contribution-guidelines)
 
 ---
 
-## About the Project
+## Project Overview
 
-SecureMed-LLM provides a **fully secure and privacy-preserving pipeline** for clinical report generation from chest X-ray images. It combines:
+SecureMed-LLM provides a **fully secure and privacy-preserving pipeline** for generating clinical reports from chest X-ray images. The framework integrates:
 
-- Differential Privacy (DP-SGD)  
-- Adversarial Fine-Tuning (FGSM, PGD, DeepFool)  
-- PHI anonymization for text and images  
-- IDS-LLM validation for clinical safety  
-- ECIES encryption for secure report delivery  
+- **Differential Privacy** using DP-SGD  
+- **Adversarial Fine-Tuning** (FGSM, PGD, DeepFool)  
+- **PHI anonymization** for text and images  
+- **IDS-LLM validation** to ensure clinical safety  
+- **ECIES encryption** for secure report delivery  
+
+**Key Benefits:**
+
+- Protects sensitive patient data during AI-driven clinical report generation  
+- Reduces risk of adversarial attacks and prompt injections  
+- Ensures clinically valid and safe outputs  
+- Provides a reproducible, GPU-compatible research workflow for medical AI  
 
 ---
 
 ## Why SecureMed-LLM is Useful
 
-- Protects sensitive patient data during AI-driven clinical report generation.  
-- Reduces risk of adversarial attacks and prompt injections.  
-- Ensures generated reports are **clinically valid and safe**.  
-- Provides a reproducible, GPU-compatible research framework for medical AI.
+SecureMed-LLM addresses critical challenges in AI-driven clinical report generation:
+
+- Ensures **patient privacy** through text/image anonymization and differential privacy  
+- Improves **model robustness** against adversarial attacks  
+- Guarantees **clinical safety** via IDS-LLM validation  
+- Provides a **secure end-to-end workflow** including report encryption and delivery  
 
 ---
 
 ## System Architecture (6-Level Secure Pipeline)
 
 1. **PHI Anonymization**  
-   Removes personally identifiable information from medical text and images using **Med-Guard** and **Presidio**.
+   - Removes personally identifiable information from medical text and images using **Med-Guard** and **Presidio**.
 
 2. **Secure Transmission (TLS 1.3)**  
-   Encrypts data transfer between systems using modern cryptography.
+   - Encrypts data transfer between systems using modern cryptography.
 
 3. **LLM Processing**  
-   Generates clinical **Findings** and **Impressions** using a fine-tuned **T5 model**.
+   - Generates clinical **Findings** and **Impressions** using a fine-tuned **T5 model**.
 
 4. **IDS-LLM Validation**  
-   Ensures safety through rule-based checks, medical constraints, and anomaly detection.
+   - Ensures safety through rule-based checks, medical constraints, and anomaly detection.
 
 5. **Report Encryption (ECIES)**  
-   Encrypts reports before delivery to prevent tampering.
+   - Encrypts reports before delivery to prevent tampering.
 
 6. **Secure Delivery**  
-   Sends encrypted reports exclusively to authorized clinicians.
+   - Sends encrypted reports exclusively to authorized clinicians.
 
 ---
 
@@ -90,18 +99,18 @@ SecureMed-LLM provides a **fully secure and privacy-preserving pipeline** for cl
 
 ---
 
-## Dataset
+## Dataset Information
 
-- Enhanced **OPEN-I Chest X-ray dataset** (from Kaggle)  
-  - **Train:** 93,347 image–report pairs  
+- **Dataset Used:** Enhanced **OPEN-I Chest X-ray dataset** (Kaggle)  
+  - **Training:** 93,347 image–report pairs  
   - **Validation:** 1,885 pairs  
   - **Test:** 1,541 images  
-- Each study includes a chest X-ray and associated report (Findings + Impression)  
-[Dataset Link](https://www.kaggle.com/datasets/financekim/curated-cxr-report-generation-dataset/data)
+- Each study includes a chest X-ray and associated radiology report (**Findings + Impression**)  
+- [Download Dataset](https://www.kaggle.com/datasets/financekim/curated-cxr-report-generation-dataset/data)
 
 ---
 
-## Results Summary
+## Results
 
 | Metric | Before | After |
 |--------|-------|------|
@@ -115,22 +124,22 @@ SecureMed-LLM provides a **fully secure and privacy-preserving pipeline** for cl
 ## Methodology & Workflow
 
 1. **Environment Setup**  
-   - Create Python virtual environment and install dependencies.
+   - Prepare Python virtual environment and install dependencies.
 
 2. **Data Preparation and Anonymization**  
-   - Text anonymization with **Med-Guard** and **Presidio**  
+   - Text anonymization using **Med-Guard** and **Presidio**  
    - Image anonymization to remove identifying metadata
 
 3. **Differential Privacy & Noise Injection**  
-   - Training with **DP-SGD** to ensure privacy–utility trade-offs
+   - Train models with **DP-SGD** to ensure privacy–utility trade-offs
 
 4. **LLM Fine-Tuning**  
-   - Visual features extracted using **BioMedCLIP**  
-   - **T5-base** fine-tuned on anonymized reports  
-   - Adversarial training with ~5% adversarial samples (**FGSM, PGD, DeepFool**)
+   - Extract visual features using **BioMedCLIP**  
+   - Fine-tune **T5-base** on anonymized reports  
+   - Adversarial training applied (~5% adversarial samples, **FGSM, PGD, DeepFool**)
 
 5. **Model Selection**  
-   - Based on robustness, BLEU score, and privacy leakage metrics
+   - Evaluate robustness, BLEU score, and privacy leakage metrics
 
 6. **Secure Deployment**  
    - Clinician submits a chest X-ray  
@@ -141,7 +150,7 @@ SecureMed-LLM provides a **fully secure and privacy-preserving pipeline** for cl
 
 ---
 
-## Installation
+## Installation & Requirements
 
 ```bash
 # Clone repository
@@ -153,9 +162,9 @@ python -m venv venv
 source venv/bin/activate   # Linux / macOS
 venv\Scripts\activate      # Windows
 
-
-### Install dependencies
+# Install dependencies
 pip install -r requirements.txt
+
 
 ### Usage
 Data Preprocessing & PHI Anonymization
