@@ -184,3 +184,12 @@ Training and fine-tuning were conducted using GPU resources
 Suitable platforms include Google Colab, AWS, Azure, or similar services
 
 Local execution without a GPU is suitable only for preprocessing or evaluation
+## Installation
+
+Clone the repository:
+```bash
+git clone https://github.com/ayamouna/SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models.git
+cd SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models
+Install dependencies:
+
+pip install -r requirements.txt
