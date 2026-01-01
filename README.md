@@ -1,199 +1,156 @@
 # SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models
-Description
 
-This repository provides the full implementation of SecureMed-LLM, a secure medical AI framework designed to generate chest X-ray clinical reports while ensuring privacy preservation, robustness against adversarial attacks, and secure delivery of clinical outputs.
+This repository provides the full implementation of **SecureMed-LLM**, a secure medical AI framework designed to generate chest X-ray clinical reports while ensuring **privacy preservation**, **adversarial robustness**, and **clinical safety**.
 
-The framework integrates privacy-preserving learning, adversarial robustness, clinical safety validation, and cryptographic protection into a unified multi-level secure pipeline.
+This work accompanies the master thesis:  
+*"SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models."*
 
-This code accompanies the master thesis:
-“SecureMed-LLM: A Privacy-Preserving Framework for Safeguarding Clinical Language Models.”
+---
 
-System Architecture (6-Level Secure Pipeline)
+## System Architecture (6-Level Secure Pipeline)
 
 SecureMed-LLM follows a six-level security pipeline designed to protect patient data, ensure robust processing, and deliver safe clinical reports:
 
-Level 1 — PHI Anonymization
-Removes personally identifiable information from medical images and text using Med-Guard and Presidio.
+1. **PHI Anonymization**  
+   Removes personally identifiable information from medical text and images using **Med-Guard** and **Presidio**.
 
-Level 2 — Secure Transmission (TLS 1.3)
-Protects data transfer using modern cryptographic protocols.
+2. **Secure Transmission (TLS 1.3)**  
+   Protects data transfer using modern cryptographic protocols.
 
-Level 3 — LLM Processing
-Generates clinical Findings and Impressions using a robust fine-tuned large language model.
+3. **LLM Processing**  
+   Generates clinical **Findings** and **Impressions** using a robust fine-tuned **T5 model**.
 
-Level 4 — IDS-LLM Validation
-Ensures clinical safety using rule-based checks, medical constraints, and anomaly detection.
+4. **IDS-LLM Validation**  
+   Ensures clinical safety through rule-based checks, medical constraints, and anomaly detection.
 
-Level 5 — Report Encryption (ECIES)
-Encrypts the generated clinical report before delivery to prevent tampering or interception.
+5. **Report Encryption (ECIES)**  
+   Encrypts generated reports to prevent tampering or interception.
 
-Level 6 — Secure Delivery
-Delivers encrypted reports exclusively to authorized clinicians.
+6. **Secure Delivery**  
+   Sends encrypted reports exclusively to authorized clinicians.
 
-Models Used
-BioMedCLIP
+The system integrates:  
+- Differential Privacy training (**DP-SGD**)  
+- Adversarial Fine-Tuning (**FGSM, PGD, DeepFool**)  
+- PHI Anonymization for text and images  
+- Encrypted inference using **ECIES**  
+- IDS-LLM validation for safe clinical outputs
 
-BioMedCLIP is used as the vision–language backbone for medical image understanding and multimodal alignment.
+---
 
-Model: BioMedCLIP
+## Models Used
 
-Purpose: Chest X-ray image encoding and visual–textual feature alignment
+- **BioMedCLIP**  
+  Vision–language backbone for medical image understanding and multimodal alignment.  
+  **Purpose:** Chest X-ray image encoding and visual–textual feature alignment  
+  [HuggingFace Link](https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224)
 
-Source: https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224
+- **T5-base**  
+  Language model for clinical report generation (Findings + Impressions).  
+  **Purpose:** Generation of radiology reports  
+  [HuggingFace Link](https://huggingface.co/google/t5/t5-base)
 
-Pretrained weights provided by the original authors
+---
 
-T5 Language Model
+## Key Features
 
-A T5-based language model is used for clinical report generation.
+- Adversarially robust report generation (**FGSM, PGD, DeepFool**)  
+- Differential Privacy (**DP-SGD**, ε configurable)  
+- PHI anonymization for both text and images  
+- Encrypted inference pipeline using **ECIES**  
+- IDS-LLM validation for clinical safety  
+- Multi-level secure architecture
 
-Model family: T5
+---
 
-Version: T5-base
+## Dataset
 
-Purpose: Generation of Findings and Impression sections
+- Enhanced version of **OPEN-I Chest X-ray dataset**, from Kaggle:  
+  - **Training:** 93,347 image–report pairs  
+  - **Validation:** 1,885 pairs  
+  - **Test:** 1,541 images  
+- Each study includes a chest X-ray image and associated radiology report (Findings + Impression)  
+[Dataset Link](https://www.kaggle.com/datasets/financekim/curated-cxr-report-generation-dataset/data)
 
-Source: https://huggingface.co/google-t5/t5-base
+---
 
-Fine-tuned on anonymized medical report data
+## Results Summary
 
-Key Features
+| Metric | Before | After |
+|--------|-------|------|
+| Membership Inference Attack | 89% | 55% |
+| Prompt Injection Defense | 37.5% | 78.3% |
+| Adversarial Robust BLEU | 0.29 | 0.68 |
+| Validation Pass Rate | - | 91.8% |
 
-Adversarially robust report generation (FGSM, PGD, DeepFool)
+---
 
-Differential Privacy training using DP-SGD (ε configurable)
+## Methodology & Workflow
 
-PHI anonymization for both text and images
+1. **Environment Setup**  
+   - Create a Python virtual environment and install dependencies.
 
-Encrypted inference pipeline using ECIES
+2. **Data Preparation and Anonymization**  
+   - Text anonymization with **Med-Guard** and **Presidio**  
+   - Image anonymization to remove identifying metadata
 
-IDS-LLM validation for clinical safety
+3. **Differential Privacy and Noise Injection**  
+   - Training with **DP-SGD** to evaluate privacy–utility trade-offs
 
-Multi-level secure system architecture
+4. **LLM Fine-Tuning**  
+   - **BioMedCLIP** extracts visual features from chest X-rays  
+   - **T5-base** fine-tuned on anonymized reports  
+   - Adversarial training applied (**FGSM, PGD, DeepFool**) with ~5% adversarial samples
 
-Graphical Abstract
+5. **Model Selection**  
+   - Based on robustness, BLEU score, and privacy leakage metrics
 
-The graphical abstract illustrates the complete SecureMed-LLM pipeline, including:
+6. **Secure Deployment**  
+   - Clinician submits a chest X-ray  
+   - SecureMed-LLM generates report  
+   - IDS-LLM validates report  
+   - Report encrypted with clinician’s public key  
+   - Clinician decrypts report using private key
 
-Local anonymization of patient images and text
-
-Secure data transmission
-
-Robust LLM fine-tuning with adversarial training and Differential Privacy
-
-IDS-LLM validation blocking unsafe or inconsistent reports
-
-ECIES encryption protecting the generated report
-
-Secure delivery to clinicians
-
-Results Summary
-
-Membership Inference Attack reduction: 89% → 55% with Differential Privacy
-
-Prompt injection defense accuracy: 37.5% → 78.3%
-
-Adversarial robust BLEU score: 0.29 → 0.68 after fine-tuning
-
-Validation pass rate: 91.8%
-
-Dataset Information
-
-The experiments use an enhanced version of the publicly available OPEN-I Chest X-ray dataset, obtained from Kaggle.
-
-Training set: 93,347 image–report pairs
-
-Validation set: 1,885 pairs
-
-Test set: 1,541 images
-
-Each study includes a chest X-ray image and an associated radiology report (Findings + Impression).
-
-Dataset link:
-https://www.kaggle.com/datasets/financekim/curated-cxr-report-generation-dataset/data
-
-Code Information
-
-The repository contains:
-
-Data preprocessing scripts
-
-Model training and adversarial fine-tuning scripts
-
-Privacy-preserving and anonymization modules
-
-IDS-LLM validation components
-
-ECIES-based encryption modules
-
-Evaluation and result analysis scripts
-
-Methodology and Workflow
-
-SecureMed-LLM follows a staged experimental workflow:
-
-Environment Setup
-A Python virtual environment is created and dependencies are installed.
-
-Data Preparation and Anonymization
-
-Text anonymization using Med-Guard and Presidio
-
-Image anonymization to remove identifying metadata and features
-
-Differential Privacy and Noise Injection
-Training is performed using DP-SGD with multiple ε values to evaluate privacy–utility trade-offs.
-
-LLM Fine-Tuning
-
-BioMedCLIP extracts visual features
-
-T5-base is fine-tuned on anonymized reports
-
-Adversarial training (FGSM, PGD, DeepFool) is applied
-
-Approximately 5% adversarial samples are injected during fine-tuning
-
-Model Selection
-The best model is selected based on:
-
-Robustness
-
-BLEU score
-
-Privacy leakage metrics
-
-Secure Deployment
-
-Clinician submits a chest X-ray
-
-SecureMed-LLM generates a report
-
-IDS-LLM validates the report
-
-The report is encrypted with the clinician’s public key
-
-The clinician decrypts it using their private key
-
-Computational Resources
-
-Due to the computational requirements of large language models (LLMs), GPU-enabled or cloud-based environments are recommended.
-
-Training and fine-tuning were conducted using GPU resources
-
-Suitable platforms include Google Colab, AWS, Azure, or similar services
-
-Local execution without a GPU is suitable only for preprocessing or evaluation
-
-Some components (e.g., large-scale LLM fine-tuning) require GPU-enabled or cloud-based environments due to computational constraints.
+---
 
 ## Installation
 
-Clone the repository:
+### Clone repository
 ```bash
 git clone https://github.com/ayamouna/SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models.git
 cd SecureMed-LLM-A-Privacy-Preserving1-Framework-for-Safeguarding-Clinical2-Language-Models
-Install dependencies:
+```
+### Create virtual environment
+python -m venv venv
+source venv/bin/activate   # Linux / macOS
+venv\Scripts\activate      # Windows
 
-pip install -r requirements.txt:
+### Install dependencies
+pip install -r requirements.txt
 
+### Usage
+Data Preprocessing & PHI Anonymization
+python medguard_text_anonymizer.py
+python medguard_image_anonymizer.py
+
+### LLM Fine-Tuning & Adversarial Training
+python finetune_llm_offline.py
+python dp_training.py
+python adversarial_training.py
+
+### IDS-LLM Validation
+python ids_validation.py
+python visualize_ids_performance.py
+
+### ECIES Encryption / Secure Delivery
+python encrypt_report.py
+python decrypt_report.py
+
+### Computational Resources
+
+GPU-enabled or cloud-based environments recommended (Google Colab, AWS, Azure)
+
+CPU-only is suitable for preprocessing or small-scale testing
+
+Some components (e.g., large-scale LLM fine-tuning) require GPUs due to computational constraints
